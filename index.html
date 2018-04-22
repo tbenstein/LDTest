@@ -28,6 +28,7 @@
         .then(function(characteristic) {
             // Step 5: Write to the characteristic
             var data = new Uint8Array([0xF1, 0xF1, 0x01, 0x00, 0x01, 0x7E]);
+            alert(writing data);
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
