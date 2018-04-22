@@ -5,10 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-    This is a test
-    <a href="javascript:connectAndMove()">Connect</a>
+    <p><a href="javascript:connectAndMove()">Connect</a></p>
+    <p><a href="javascript:up()">Up</a></p>
+    <p><a href="javascript:down()">Down</a></p>
 </body>
 <script>
+    var dataInCharacteristic;
     function connectAndMove() {
         navigator.bluetooth.requestDevice({
         filters: [{ services: [0xff12] }]
@@ -27,14 +29,18 @@
         })
         .then(function(characteristic) {
             // Step 5: Write to the characteristic
-            var data = new Uint8Array([0xF1, 0xF1, 0x01, 0x00, 0x01, 0x7E]);
-            console.log('writing data');
-            return characteristic.writeValue(data);
+            dataInCharacteristic = characteristic;
+            console.log("data in found");
         })
         .catch(function(error) {
             // And of course: error handling!
             console.error('Connection failed!', error);
         });
+    }
+    function up() {
+        var data = new Uint8Array([0xF1, 0xF1, 0x01, 0x00, 0x01, 0x7E]);
+        console.log('writing data');
+        dataInCharacteristic.writeValue(data);
     }
     
 </script>
