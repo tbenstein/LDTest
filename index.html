@@ -12,7 +12,9 @@
 <script>
     var dataInCharacteristic;
     function connectAndMove() {
-        navigator.bluetooth.requestDevice()
+        navigator.bluetooth.requestDevice({
+        filters: []
+    })
         .then(function(device) {
             // Step 2: Connect to it
             return device.gatt.connect();
