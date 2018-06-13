@@ -12,9 +12,7 @@
 <script>
     var dataInCharacteristic;
     function connectAndMove() {
-        navigator.bluetooth.requestDevice({
-        filters: [{ services: [0xff12] }]
-    })
+        navigator.bluetooth.requestDevice()
         .then(function(device) {
             // Step 2: Connect to it
             return device.gatt.connect();
@@ -38,6 +36,11 @@
         });
     }
     function up() {
+        var data = new Uint8Array([0xF1, 0xF1, 0x01, 0x00, 0x01, 0x7E]);
+        console.log('writing data');
+        dataInCharacteristic.writeValue(data);
+    }
+    function down() {
         var data = new Uint8Array([0xF1, 0xF1, 0x01, 0x00, 0x01, 0x7E]);
         console.log('writing data');
         dataInCharacteristic.writeValue(data);
