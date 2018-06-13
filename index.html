@@ -13,7 +13,7 @@
     var dataInCharacteristic;
     function connectAndMove() {
         navigator.bluetooth.requestDevice({
-        filters: [{  }]
+        filters: [{ services: [0xff12] }]
     })
         .then(function(device) {
             // Step 2: Connect to it
